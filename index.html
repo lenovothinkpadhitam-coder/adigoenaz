@@ -1,0 +1,1451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pembangunan Masjid Darrusalam</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts & Font Awesome Icons (Loaded with swap display for performance) -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
+  
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #062424; /* Updated base deep emerald/teal color */
+    }
+    .custom-glass {
+      background: rgba(6, 36, 36, 0.65); /* Blended teal glass card with higher contrast */
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px); /* Safari support */
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .text-gradient-cyan-blue {
+      background: linear-gradient(135deg, #2DD4BF 0%, #3B82F6 100%); /* Emerald Teal to Blue gradient */
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .admin-glass {
+      background: rgba(6, 26, 26, 0.9);
+      border: 1px dashed rgba(45, 212, 191, 0.4);
+    }
+    /* Hide scrollbar but keep functionality */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+    /* Hardware acceleration optimization to avoid stutter on mobile */
+    .will-change-transform {
+      will-change: transform;
+    }
+  </style>
+</head>
+<body class="text-slate-100 min-h-screen pb-16 overflow-x-hidden relative">
+
+  <!-- PREMIUM BACKGROUND ORNAMEN & OVERLAY -->
+  <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+    <!-- Base Color Background -->
+    <div class="absolute inset-0 bg-[#062424]"></div>
+    <!-- Radial Gradient for depth and glow -->
+    <div class="absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(20,95,95,0.35)_0%,rgba(6,36,36,1)_100%)]"></div>
+    <!-- Ornament Watermark Image (Optimized Visibility & Responsiveness) -->
+    <div class="absolute inset-0 opacity-25 bg-center bg-no-repeat bg-[length:85%] md:bg-[length:45%] transition-opacity duration-500" style="background-image: url('https://i.ibb.co.com/HpN91DFg/panitia-pembangunan-masjid-darrusalam.png');"></div>
+  </div>
+
+  <!-- MAIN WRAPPER (Sits on top of the background) -->
+  <div class="relative z-10">
+
+    <!-- Floating Admin Button & Status -->
+    <div class="fixed bottom-6 left-6 z-40">
+      <button id="btn-portal-admin" onclick="toggleLoginModal()" class="flex items-center gap-2 bg-[#093a3a]/90 border border-[#1d5c5c] hover:border-teal-400/80 hover:bg-[#0d4d4d] text-slate-300 hover:text-white px-4 py-2.5 rounded-full shadow-2xl transition-all duration-300 active:scale-95">
+        <i id="portal-icon" class="fa-solid fa-lock text-teal-400"></i>
+        <span id="portal-text" class="text-xs font-bold">Portal Admin</span>
+      </button>
+    </div>
+
+    <!-- Header Section -->
+    <header class="pt-10 pb-8 px-4 text-center max-w-6xl mx-auto">
+      <!-- Logo Header Baru (Diperbesar) -->
+      <img src="https://i.ibb.co.com/Fq5dbmw2/1-Syawal-1447-H-5.png" alt="Logo Panitia Pembangunan" class="h-32 sm:h-48 md:h-56 w-auto max-w-full mx-auto mb-6 object-contain drop-shadow-2xl hover:scale-105 transition-transform duration-500">
+
+      <div class="inline-flex items-center gap-2 bg-teal-500/10 border border-teal-500/20 px-4 py-1.5 rounded-full text-teal-400 text-xs sm:text-sm font-medium mb-4">
+        <i class="fa-solid fa-mosque text-teal-400 animate-pulse"></i>
+        <span>Laporan Real-Time Pembangunan</span>
+      </div>
+      <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight mb-2 text-white">
+        Pembangunan <span class="text-gradient-cyan-blue">Masjid Darrusalam</span>
+      </h1>
+      <p class="text-slate-400 text-sm sm:text-base flex items-center justify-center gap-2">
+        <i class="fa-regular fa-calendar-days text-teal-400"></i>
+        Laporan Keuangan Per <span id="txt-tanggal-laporan" class="font-semibold text-slate-200">Memuat...</span>
+      </p>
+    </header>
+
+    <!-- Main Container -->
+    <main class="max-w-6xl mx-auto px-4 space-y-8">
+
+      <!-- ================== SECTION ADMIN CONTROL CENTER (Dinamis) ================== -->
+      <section id="admin-panel" class="hidden admin-glass rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden transition-all duration-500 border border-teal-500/30">
+        <div class="absolute -right-20 -top-20 w-48 h-48 bg-teal-600/10 rounded-full blur-3xl pointer-events-none"></div>
+        
+        <!-- Admin Header -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-teal-500/20">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-teal-600/20 rounded-xl flex items-center justify-center text-teal-400 border border-teal-500/30">
+              <i class="fa-solid fa-user-gear text-lg"></i>
+            </div>
+            <div>
+              <h2 class="text-xl font-extrabold text-white tracking-tight">Admin Control Center</h2>
+              <p class="text-xs text-teal-400">Mode pengelolaan data pembangunan aktif</p>
+            </div>
+          </div>
+          <button onclick="logoutAdmin()" class="bg-rose-500/10 hover:bg-rose-500/20 text-rose-400 border border-rose-500/30 px-4 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 self-start sm:self-auto active:scale-95">
+            <i class="fa-solid fa-right-from-bracket"></i> Keluar Admin
+          </button>
+        </div>
+
+        <!-- Admin Actions Grid (Dua Kolom: Edit Keuangan & Tambah Dokumentasi) -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          
+          <!-- Form 1: Ubah Informasi Keuangan -->
+          <div class="bg-slate-950/40 p-5 rounded-2xl border border-teal-900/30">
+            <h3 class="text-sm font-bold text-teal-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-pen-to-square"></i> Perbarui Angka Keuangan
+            </h3>
+            <form id="form-keuangan" onsubmit="handleUpdateKeuangan(event)" class="space-y-4">
+              <div>
+                <label class="block text-xs font-medium text-slate-400 mb-1">Tanggal Laporan (Teks bebas, misal: 2 Januari 2026)</label>
+                <input type="text" id="input-tanggal-laporan" required class="w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-teal-500">
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-400 mb-1">Target Anggaran (Rp)</label>
+                  <input type="number" id="input-target-donasi" required class="w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-teal-500">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-400 mb-1">Kas Masjid (Rp)</label>
+                  <input type="number" id="input-kas-masjid" required class="w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-teal-500">
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label class="block text-xs font-medium text-slate-400 mb-1">Jariyah Warga (Rp)</label>
+                  <input type="number" id="input-jariyah-warga" required class="w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-teal-500">
+                </div>
+                <div>
+                  <label class="block text-xs font-medium text-slate-400 mb-1">Total Pengeluaran (Rp)</label>
+                  <input type="number" id="input-total-pengeluaran" required class="w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-teal-500">
+                </div>
+              </div>
+              <button type="submit" class="w-full bg-gradient-to-r from-teal-600 to-emerald-600 hover:from-teal-500 hover:to-emerald-500 text-white font-bold py-2.5 rounded-xl text-xs tracking-wider uppercase transition-all shadow-lg flex items-center justify-center gap-2 active:scale-95">
+                <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan Keuangan
+              </button>
+            </form>
+          </div>
+
+          <!-- Form 2: Tambah Dokumentasi Baru -->
+          <div class="bg-slate-950/40 p-5 rounded-2xl border border-teal-900/30 flex flex-col justify-between">
+            <div>
+              <h3 class="text-sm font-bold text-emerald-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+                <i class="fa-solid fa-cloud-arrow-up"></i> Upload Dokumentasi Baru
+              </h3>
+              <!-- Form Bulk Upload -->
+              <form id="form-dokumentasi" onsubmit="handleAddDokumentasiBulk(event)" class="space-y-4">
+                
+                <!-- Container untuk baris-baris form dinamis -->
+                <div id="bulk-doc-container" class="space-y-3 max-h-[40vh] overflow-y-auto pr-2 no-scrollbar">
+                  
+                  <!-- Baris Input Pertama -->
+                  <div class="doc-item bg-[#041a1a]/80 p-4 rounded-xl border border-teal-900/50 relative group transition-all">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-3">
+                      <div>
+                        <label class="block text-[10px] font-medium text-slate-400 mb-1">Tanggal Progres</label>
+                        <input type="date" required class="doc-tanggal w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-emerald-500">
+                      </div>
+                      <div>
+                        <label class="block text-[10px] font-medium text-slate-400 mb-1">Kategori</label>
+                        <select required class="doc-kategori w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-emerald-500">
+                          <option value="Foto">Foto (Google Drive Link)</option>
+                          <option value="Video">Video (YouTube Link)</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div class="space-y-3">
+                      <div>
+                        <input type="text" required placeholder="Judul / Keterangan Progres" class="doc-judul w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-sm text-slate-100 focus:outline-none focus:border-emerald-500">
+                      </div>
+                      <div>
+                        <input type="url" required placeholder="Tautan URL (Drive/YouTube)" class="doc-url w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-3 py-2 text-xs text-slate-100 focus:outline-none focus:border-emerald-500">
+                      </div>
+                    </div>
+                    <!-- Tombol Hapus Baris (Awalnya disembunyikan) -->
+                    <button type="button" onclick="removeDocRow(this)" class="btn-remove-doc hidden absolute -top-2 -right-2 bg-rose-600 text-white w-6 h-6 rounded-full flex items-center justify-center text-[10px] hover:bg-rose-500 transition-all shadow-md"><i class="fa-solid fa-xmark"></i></button>
+                  </div>
+
+                </div>
+
+                <!-- Tombol Tambah Baris -->
+                <button type="button" onclick="addDocRow()" class="w-full bg-teal-900/30 hover:bg-teal-900/60 border border-teal-800/50 text-teal-400 font-semibold py-2 rounded-xl text-xs tracking-wide transition-all flex items-center justify-center gap-2 border-dashed active:scale-[0.98]">
+                  <i class="fa-solid fa-plus"></i> Tambah Baris Input Lain
+                </button>
+
+                <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold py-2.5 rounded-xl text-xs tracking-wider uppercase transition-all shadow-lg flex items-center justify-center gap-2 active:scale-95 mt-4">
+                  <i class="fa-solid fa-cloud-arrow-up"></i> Simpan Semua Dokumentasi
+                </button>
+              </form>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- SECTION 1: KEUANGAN (Meniru Presisi Gambar 1) -->
+      <section class="custom-glass rounded-3xl p-6 sm:p-8 shadow-2xl relative overflow-hidden">
+        <!-- Ornamen Dekoratif Minimalis -->
+        <div class="absolute -right-20 -top-20 w-48 h-48 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+        <div class="absolute -left-20 -bottom-20 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <!-- Icon & Judul Section -->
+        <div class="flex items-center gap-3 mb-6 sm:mb-8 pb-4 border-b border-teal-800/30">
+          <div class="w-10 h-10 bg-teal-500/10 rounded-xl flex items-center justify-center text-teal-400 border border-teal-500/20">
+            <i class="fa-solid fa-chart-line text-lg"></i>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-bold text-white">Progress Keuangan Donasi</h2>
+        </div>
+
+        <!-- Grid 3 Utama (Target, Terkumpul, Sisa) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-8">
+          <!-- Target Donasi -->
+          <div class="bg-teal-950/40 border border-teal-900/30 p-5 rounded-2xl flex flex-col justify-between hover:scale-[1.01] transition-transform duration-300">
+            <span class="text-xs sm:text-sm font-medium text-slate-400 mb-2 block tracking-wide uppercase">Target Donasi</span>
+            <span id="txt-target-donasi" class="text-2xl sm:text-3xl font-extrabold text-teal-400">Rp 0</span>
+            <span class="text-[11px] text-slate-500 mt-2 flex items-center gap-1">
+              <i class="fa-solid fa-bullseye text-teal-400/70"></i> Anggaran Total Rencana
+            </span>
+          </div>
+
+          <!-- Donasi Terkumpul -->
+          <div class="bg-teal-950/40 border border-teal-900/30 p-5 rounded-2xl flex flex-col justify-between hover:scale-[1.01] transition-transform duration-300">
+            <span class="text-xs sm:text-sm font-medium text-slate-400 mb-2 block tracking-wide uppercase">Donasi Terkumpul</span>
+            <span id="txt-donasi-terkumpul" class="text-2xl sm:text-3xl font-extrabold text-emerald-400">Rp 0</span>
+            <span class="text-[11px] text-slate-500 mt-2 flex items-center gap-1">
+              <i class="fa-solid fa-circle-check text-emerald-400/70"></i> Akumulasi Dana Masuk
+            </span>
+          </div>
+
+          <!-- Sisa Donasi Dibutuhkan -->
+          <div class="bg-teal-950/40 border border-teal-900/30 p-5 rounded-2xl flex flex-col justify-between hover:scale-[1.01] transition-transform duration-300">
+            <span class="text-xs sm:text-sm font-medium text-slate-400 mb-2 block tracking-wide uppercase">Sisa Donasi Dibutuhkan</span>
+            <span id="txt-sisa-dibutuhkan" class="text-2xl sm:text-3xl font-extrabold text-amber-400">Rp 0</span>
+            <span class="text-[11px] text-slate-500 mt-2 flex items-center gap-1">
+              <i class="fa-solid fa-hourglass-half text-amber-400/70"></i> Kekurangan Dana Saat Ini
+            </span>
+          </div>
+        </div>
+
+        <!-- Progress Bar (Meniru Gradient Gambar 1) -->
+        <div class="mb-8">
+          <div class="flex justify-between items-center mb-2">
+            <span class="text-xs sm:text-sm font-semibold text-slate-300">Progres Pengumpulan</span>
+            <span id="txt-persentase" class="text-sm font-bold text-emerald-400">0%</span>
+          </div>
+          <div class="w-full h-4 bg-slate-950 rounded-full overflow-hidden p-0.5 border border-teal-950">
+            <div id="progress-fill" class="h-full rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-sky-500 transition-all duration-1000 ease-out" style="width: 0%"></div>
+          </div>
+        </div>
+
+        <!-- Detail Alokasi & Pengeluaran -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          <!-- Rincian Donasi Terkumpul -->
+          <div class="bg-[#051e1e] border border-teal-900/30 p-5 rounded-2xl">
+            <h3 class="text-sm font-bold text-teal-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-wallet text-teal-400"></i> Rincian Donasi Terkumpul
+            </h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center border-b border-teal-900/20 pb-2">
+                <span class="text-slate-400 text-sm">Kas Masjid:</span>
+                <span id="txt-kas-masjid" class="font-bold text-slate-200 text-sm sm:text-base">Rp 0</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400 text-sm">Jariyah Warga:</span>
+                <span id="txt-jariyah-warga" class="font-bold text-slate-200 text-sm sm:text-base">Rp 0</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dana yang Terpakai -->
+          <div class="bg-[#051e1e] border border-teal-900/30 p-5 rounded-2xl">
+            <h3 class="text-sm font-bold text-rose-400 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <i class="fa-solid fa-receipt text-rose-400"></i> Dana yang Terpakai
+            </h3>
+            <div class="space-y-3">
+              <div class="flex justify-between items-center border-b border-teal-900/20 pb-2">
+                <span class="text-slate-400 text-sm">Total Pengeluaran:</span>
+                <span id="txt-total-pengeluaran" class="font-bold text-slate-200 text-sm sm:text-base">Rp 0</span>
+              </div>
+              <div class="flex justify-between items-center">
+                <span class="text-slate-400 text-sm">Sisa Dana Operasional:</span>
+                <span id="txt-sisa-dana" class="font-bold text-teal-400 text-sm sm:text-base">Rp 0</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Teks Penutup Motivasi -->
+        <div class="mt-8 text-center border-t border-teal-900/20 pt-6">
+          <p class="text-slate-300 italic text-xs sm:text-sm tracking-wide">
+            "Mari bersama-sama mewujudkan impian membangun masjid yang megah dan berkah! 💛"
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 2: DOKUMENTASI (FOTO & VIDEO) -->
+      <section class="custom-glass rounded-3xl p-6 sm:p-8 shadow-2xl">
+        <!-- Icon & Judul Section -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-4 border-b border-teal-800/30">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 bg-teal-500/10 rounded-xl flex items-center justify-center text-teal-400 border border-teal-500/20">
+              <i class="fa-solid fa-camera text-lg"></i>
+            </div>
+            <h2 class="text-xl sm:text-2xl font-bold text-white">Dokumentasi Pembangunan</h2>
+          </div>
+          
+          <!-- Filter Tab Buttons -->
+          <div class="flex bg-[#041a1a] p-1 rounded-xl border border-teal-950 max-w-max self-start sm:self-auto">
+            <button onclick="filterMedia('Semua')" id="btn-tab-Semua" class="px-4 py-1.5 rounded-lg text-xs font-semibold transition-all duration-300 bg-teal-600 text-white">
+              Semua
+            </button>
+            <button onclick="filterMedia('Foto')" id="btn-tab-Foto" class="px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all duration-300">
+              Foto
+            </button>
+            <button onclick="filterMedia('Video')" id="btn-tab-Video" class="px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all duration-300">
+              Video
+            </button>
+          </div>
+        </div>
+
+        <!-- PREMIUM SKELETON SHIMMER LOADER -->
+        <div id="media-loader" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div class="bg-[#0a3030]/40 border border-teal-950 rounded-2xl p-4 space-y-4 animate-pulse">
+            <div class="aspect-video w-full bg-teal-900/20 rounded-xl"></div>
+            <div class="h-3.5 bg-teal-900/20 rounded w-1/4"></div>
+            <div class="h-4 bg-teal-900/20 rounded w-3/4"></div>
+          </div>
+          <div class="bg-[#0a3030]/40 border border-teal-950 rounded-2xl p-4 space-y-4 animate-pulse hidden sm:block">
+            <div class="aspect-video w-full bg-teal-900/20 rounded-xl"></div>
+            <div class="h-3.5 bg-teal-900/20 rounded w-1/3"></div>
+            <div class="h-4 bg-teal-900/20 rounded w-5/6"></div>
+          </div>
+          <div class="bg-[#0a3030]/40 border border-teal-950 rounded-2xl p-4 space-y-4 animate-pulse hidden lg:block">
+            <div class="aspect-video w-full bg-teal-900/20 rounded-xl"></div>
+            <div class="h-3.5 bg-teal-900/20 rounded w-1/5"></div>
+            <div class="h-4 bg-teal-900/20 rounded w-2/3"></div>
+          </div>
+        </div>
+
+        <!-- No Media Container -->
+        <div id="media-empty" class="hidden py-12 text-center text-slate-500">
+          <i class="fa-solid fa-folder-open text-4xl mb-3"></i>
+          <p class="text-sm">Belum ada dokumentasi yang terupload.</p>
+        </div>
+
+        <!-- Media Grid Container -->
+        <div id="media-grid" class="hidden grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <!-- Card media di-render secara dinamis lewat JS -->
+        </div>
+      </section>
+
+      <!-- SECTION 3: DONASI & PARTISIPASI (Meniru Presisi Gambar 2) -->
+      <section class="space-y-6">
+        <div class="text-center">
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white">Mari Berpartisipasi</h2>
+          <p class="text-slate-400 text-xs sm:text-sm mt-1">Bantuan Anda sangat berarti untuk menyelesaikan pembangunan rumah ibadah ini</p>
+        </div>
+
+        <!-- Box Kutipan Hadits -->
+        <div class="custom-glass rounded-3xl p-6 sm:p-8 border border-amber-500/10 text-center relative overflow-hidden max-w-4xl mx-auto">
+          <div class="absolute right-4 top-4 text-emerald-500/10 text-7xl font-serif select-none pointer-events-none">”</div>
+          <!-- Arabic Text -->
+          <p class="text-xl sm:text-2xl font-serif text-amber-200/95 leading-loose mb-4 font-normal" dir="rtl">
+            مَنْ بَنَى لِلَّهِ مَسْجِدًا وَلَوْ كَمَفْحَصِ قَطَاةٍ لِبَّيْضِهَا، بَنَى اللهُ لَهُ بَيْتًا فِي الْجَنَّةِ
+          </p>
+          <!-- Translation Text -->
+          <p class="text-slate-300 text-xs sm:text-sm italic leading-relaxed max-w-3xl mx-auto">
+            "Barangsiapa membangun masjid karena Allah, meski seukuran lubang tempat burung qatha bertelur, maka Allah membangunkan untuknya rumah di surga"
+          </p>
+          <span class="text-[11px] text-slate-500 mt-2 block">(HR Ahmad dan Ibnu Abi Syaibah)</span>
+        </div>
+
+        <!-- Unified Info Donasi & QRIS Card (Desain Baru Elegan Berdampingan) -->
+        <div class="custom-glass rounded-3xl p-6 sm:p-10 max-w-5xl mx-auto flex flex-col md:flex-row gap-8 md:gap-12 md:items-stretch">
+          
+          <!-- Informasi Donasi & Kontak (Kiri) -->
+          <div class="flex-1 w-full flex flex-col justify-between space-y-6">
+            <div>
+              <h3 class="text-lg font-bold text-white mb-5 border-b border-teal-900/30 pb-3 flex items-center gap-2">
+                <i class="fa-solid fa-circle-info text-teal-400"></i> Informasi Donasi
+              </h3>
+              <div class="space-y-5">
+                <!-- Rekening -->
+                <div class="bg-[#041a1a]/80 p-4 rounded-xl border border-teal-950 flex items-center justify-between">
+                  <div>
+                    <p class="text-xs text-slate-400">Bank Transfer (BRI):</p>
+                    <p class="text-base sm:text-lg font-bold tracking-wider text-white">1363.01.006237.53.9</p>
+                    <p class="text-xs text-slate-400 mt-1">a.n. <span class="text-slate-200 font-semibold">Masjid Darrusalam</span></p>
+                  </div>
+                  <button onclick="salinNoRek('136301006237539')" class="p-2.5 bg-teal-600/10 border border-teal-500/20 rounded-xl text-teal-400 hover:bg-teal-600 hover:text-white transition-all active:scale-95" title="Salin Rekening">
+                    <i id="btn-copy-icon" class="fa-regular fa-copy text-lg"></i>
+                  </button>
+                </div>
+
+                <!-- Hubungi Kami -->
+                <div class="space-y-3 pt-2">
+                  <p class="text-xs font-semibold text-slate-400 uppercase tracking-wider">Hubungi Panitia:</p>
+                  <a href="https://wa.me/6285865790576" target="_blank" class="flex items-center gap-3 p-2 hover:bg-teal-900/30 rounded-xl transition-all">
+                    <div class="w-8 h-8 bg-teal-500/10 rounded-lg flex items-center justify-center text-teal-400">
+                      <i class="fa-solid fa-phone text-sm"></i>
+                    </div>
+                    <div>
+                      <p class="text-xs text-slate-400">Bpk Budiyanto (Ketua Panitia)</p>
+                      <p class="text-xs sm:text-sm text-slate-200 font-semibold hover:underline">0858-6579-0576</p>
+                    </div>
+                  </a>
+                  <a href="https://wa.me/6285741797682" target="_blank" class="flex items-center gap-3 p-2 hover:bg-teal-900/30 rounded-xl transition-all">
+                    <div class="w-8 h-8 bg-teal-500/10 rounded-lg flex items-center justify-center text-teal-400">
+                      <i class="fa-solid fa-phone text-sm"></i>
+                    </div>
+                    <div>
+                      <p class="text-xs text-slate-400">Bpk Badian (Bendahara)</p>
+                      <p class="text-xs sm:text-sm text-slate-200 font-semibold hover:underline">0857-4179-7682</p>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <!-- Alamat & Lokasi Maps -->
+            <div class="border-t border-teal-900/30 pt-4 flex gap-3 group cursor-pointer" onclick="window.open('https://maps.app.goo.gl/D1vXy9jsGMJEwXpy5', '_blank')" title="Buka di Google Maps">
+              <div class="text-rose-400 pt-1 group-hover:scale-110 transition-transform duration-300">
+                <i class="fa-solid fa-location-dot text-lg drop-shadow-[0_0_8px_rgba(244,63,94,0.6)]"></i>
+              </div>
+              <div class="flex-1">
+                <p class="text-xs text-slate-400 flex items-center justify-between">
+                  <span>Lokasi Pembangunan:</span>
+                  <span class="text-[10px] text-teal-400 bg-teal-400/10 px-2 py-0.5 rounded-full border border-teal-500/20 group-hover:bg-teal-500 group-hover:text-white transition-all"><i class="fa-solid fa-map-location-dot"></i> Buka Maps</span>
+                </p>
+                <p class="text-xs sm:text-sm text-slate-200 leading-relaxed font-medium mt-1 group-hover:text-white transition-colors">
+                  Dusun Bandungan, Desa Gedangan, Kec. Tuntang, Kab. Semarang
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Divider Halus untuk Memisahkan Kiri dan Kanan -->
+          <div class="hidden md:block w-px bg-teal-900/50 my-4"></div>
+          <div class="md:hidden h-px w-full bg-teal-900/50"></div>
+
+          <!-- Scan QRIS (Kanan) -->
+          <div class="flex flex-col items-center justify-center text-center w-full md:w-80 shrink-0">
+            <h3 class="text-lg font-bold text-white mb-5 flex items-center gap-2">
+              <i class="fa-solid fa-qrcode text-emerald-400"></i> Scan QRIS GPN
+            </h3>
+            <!-- QRIS Container -->
+            <div onclick="zoomQR()" class="bg-white p-3 rounded-2xl shadow-lg border border-slate-200 w-full aspect-square max-w-[220px] md:max-w-full flex justify-center items-center relative group overflow-hidden cursor-pointer hover:ring-4 hover:ring-teal-500/30 active:scale-95 transition-all">
+              <!-- Image QRIS Asli -->
+              <img src="https://i.ibb.co.com/m51QTmrh/Whats-App-Image-2026-05-25-at-14-14-42.jpg" alt="QRIS Masjid Darrusalam" class="w-full h-full object-contain rounded-xl" loading="lazy" decoding="async">
+              
+              <!-- Overlay click zoom -->
+              <div class="absolute inset-0 bg-slate-950/80 rounded-2xl flex flex-col justify-center items-center opacity-0 md:group-hover:opacity-100 transition-opacity duration-300">
+                <i class="fa-solid fa-magnifying-glass-plus text-3xl text-white mb-2 animate-bounce"></i>
+                <span class="text-xs font-semibold text-slate-200">Klik Perbesar</span>
+              </div>
+              
+              <!-- Indikator kecil khusus seluler agar jamaah paham gambar bisa diketuk -->
+              <div class="absolute bottom-2 right-2 bg-slate-950/80 text-white px-2.5 py-1 rounded-lg text-[10px] flex items-center gap-1 md:hidden">
+                <i class="fa-solid fa-magnifying-glass-plus"></i> Zoom
+              </div>
+            </div>
+            
+            <p class="text-xs text-slate-400 mt-6 leading-relaxed bg-[#041a1a]/80 p-3 rounded-xl border border-teal-950 w-full">
+              Scan barcode di atas menggunakan m-Banking, GOPAY, OVO, Dana, atau LinkAja
+            </p>
+          </div>
+          
+        </div>
+      </section>
+    </main>
+
+  </div> <!-- END MAIN WRAPPER -->
+
+  <!-- MODAL: LOGIN ADMIN -->
+  <div id="modal-login" class="fixed inset-0 bg-slate-950/80 z-50 hidden flex items-center justify-center p-4 transition-all duration-300">
+    <div class="relative max-w-md w-full bg-slate-900 border border-teal-950 p-6 sm:p-8 rounded-3xl shadow-2xl">
+      <button onclick="toggleLoginModal()" class="absolute top-4 right-4 text-slate-400 hover:text-white transition-all">
+        <i class="fa-solid fa-xmark text-lg"></i>
+      </button>
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 bg-teal-500/10 rounded-2xl flex items-center justify-center text-teal-400 border border-teal-500/20 mx-auto mb-3">
+          <i class="fa-solid fa-shield-halved text-xl"></i>
+        </div>
+        <h3 class="text-lg font-bold text-white">Login Portal Admin</h3>
+        <p class="text-xs text-slate-400 mt-1">Masukkan kata sandi admin untuk mulai mengelola laporan</p>
+      </div>
+      <form onsubmit="handleLoginAdmin(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-semibold text-slate-400 mb-1">Kata Sandi Admin</label>
+          <input type="password" id="input-password-admin" required placeholder="••••••••" class="w-full bg-[#051c1c] border border-teal-900/50 rounded-xl px-4 py-3 text-sm text-slate-100 focus:outline-none focus:border-teal-500">
+          <p id="error-login-msg" class="text-rose-400 text-xs mt-2 hidden flex items-center gap-1">
+            <i class="fa-solid fa-circle-exclamation"></i> Sandi salah, silakan coba lagi.
+          </p>
+        </div>
+        <button type="submit" class="w-full bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 rounded-xl text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 active:scale-95">
+          <i class="fa-solid fa-right-to-bracket"></i> Masuk Sekarang
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ================== PREMIUM SLIDING SIDEBAR DETIL FOTO (CAROUSEL) ================== -->
+  <!-- Backdrop Gelap -->
+  <div id="sidebar-backdrop" class="fixed inset-0 bg-slate-950/80 z-40 hidden opacity-0 transition-opacity duration-300 pointer-events-auto"></div>
+  
+  <!-- Container Sidebar (Sliding Drawer) -->
+  <aside id="sidebar-foto" class="fixed inset-y-0 right-0 w-full sm:max-w-md md:max-w-lg bg-[#072424] border-l border-teal-950 z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col shadow-2xl will-change-transform">
+    <!-- Header Sidebar -->
+    <div class="p-4 border-b border-teal-950 flex items-center justify-between bg-[#0b3333]">
+      <div class="flex items-center gap-2">
+        <i class="fa-solid fa-images text-teal-400"></i>
+        <span id="sidebar-counter" class="text-xs font-bold text-slate-400 uppercase tracking-wider">Foto 1 dari 1</span>
+      </div>
+      <button onclick="closePhotoSidebar()" class="w-8 h-8 rounded-lg bg-teal-950 hover:bg-teal-900 text-slate-300 hover:text-white flex items-center justify-center transition-all" title="Tutup">
+        <i class="fa-solid fa-xmark text-base"></i>
+      </button>
+    </div>
+
+    <!-- Konten Scrollable -->
+    <div class="flex-1 overflow-y-auto p-5 space-y-6 no-scrollbar flex flex-col justify-between">
+      
+      <!-- Area Gambar Utama & Tombol Navigasi Slider -->
+      <div class="space-y-4">
+        <div class="relative aspect-video w-full rounded-2xl overflow-hidden bg-slate-950 border border-teal-950 shadow-inner group">
+          <!-- Gambar Utama -->
+          <img id="sidebar-main-img" src="" alt="Detail Dokumentasi" class="w-full h-full object-cover transition-all duration-300" loading="lazy" decoding="async">
+          
+          <!-- Tombol Geser Kiri (Prev) -->
+          <button onclick="navigatePhoto(-1)" class="absolute left-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/70 hover:bg-teal-600/90 text-white flex items-center justify-center shadow-lg transition-all active:scale-90" title="Sebelumnya">
+            <i class="fa-solid fa-chevron-left"></i>
+          </button>
+          
+          <!-- Tombol Geser Kanan (Next) -->
+          <button onclick="navigatePhoto(1)" class="absolute right-3 top-1/2 -translate-y-1/2 w-10 h-10 rounded-full bg-slate-950/70 hover:bg-teal-600/90 text-white flex items-center justify-center shadow-lg transition-all active:scale-90" title="Berikutnya">
+            <i class="fa-solid fa-chevron-right"></i>
+          </button>
+
+          <!-- Label Swipe Hint di Mobile -->
+          <div class="absolute bottom-3 left-1/2 -translate-x-1/2 bg-slate-950/80 backdrop-blur px-3 py-1 rounded-full text-[10px] text-slate-400 flex items-center gap-1.5 pointer-events-none sm:hidden">
+            <i class="fa-solid fa-left-right text-teal-400"></i>
+            <span>Usap layar untuk menggeser</span>
+          </div>
+        </div>
+
+        <!-- Detail Informasi Foto -->
+        <div class="bg-[#051e1e]/90 p-4 rounded-2xl border border-teal-950 space-y-2">
+          <div class="flex items-center gap-2 text-[10px] font-bold tracking-wider text-slate-400">
+            <span class="text-teal-400 bg-teal-400/10 border border-teal-500/20 px-2.5 py-0.5 rounded-md">FOTO</span>
+            <span id="sidebar-date" class="flex items-center gap-1"><i class="fa-regular fa-clock"></i> 02 Jan 2026</span>
+          </div>
+          <h3 id="sidebar-title" class="text-white text-base sm:text-lg font-bold leading-snug">Judul Progres</h3>
+        </div>
+      </div>
+
+      <!-- Thumbnails Track & Download -->
+      <div class="space-y-4 pt-4 border-t border-teal-950">
+        <h4 class="text-xs font-bold text-slate-400 uppercase tracking-widest flex items-center gap-1.5">
+          <i class="fa-solid fa-rectangle-list text-teal-400"></i> Telusuri Foto Lainnya
+        </h4>
+        
+        <!-- Track Thumbnail Horizontal -->
+        <div id="sidebar-thumb-track" class="flex gap-2.5 overflow-x-auto pb-2 scroll-smooth no-scrollbar select-none">
+          <!-- Thumbnail di-render secara dinamis lewat JS -->
+        </div>
+
+        <!-- Tombol Aksi Download -->
+        <div class="flex gap-3">
+          <a id="sidebar-download-btn" href="#" target="_blank" class="flex-1 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold py-3 rounded-xl flex items-center justify-center gap-2 transition-all shadow-lg active:scale-95">
+            <i class="fa-solid fa-up-right-from-square"></i> Buka Gambar Resolusi Penuh
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </aside>
+
+  <!-- MODAL: PREVIEW QRIS JUMBO -->
+  <div id="modal-qris" class="fixed inset-0 bg-slate-950/95 z-50 hidden flex items-center justify-center p-4 transition-all duration-300 cursor-zoom-out">
+    <div class="relative max-w-sm w-full bg-white p-6 rounded-3xl shadow-2xl flex flex-col items-center" onclick="event.stopPropagation()">
+      <button onclick="closeZoomQR()" class="absolute -top-12 right-0 bg-white/10 hover:bg-white/20 text-white w-10 h-10 rounded-full flex items-center justify-center transition-all text-lg" title="Tutup">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <h3 class="text-slate-900 text-lg font-bold mb-3 flex items-center gap-2">
+        <i class="fa-solid fa-qrcode text-teal-600"></i> QRIS Masjid Darrusalam
+      </h3>
+      
+      <!-- Real QRIS Image for Preview Full Size -->
+      <div class="w-full aspect-square max-w-[280px] bg-white rounded-xl overflow-hidden shadow-inner flex items-center justify-center p-2 border border-slate-100">
+        <img src="https://i.ibb.co.com/m51QTmrh/Whats-App-Image-2026-05-25-at-14-14-42.jpg" alt="QRIS Masjid Darrusalam Jumbo" class="w-full h-full object-contain" loading="lazy" decoding="async">
+      </div>
+      
+      <p class="text-[11px] text-slate-500 mt-4 text-center leading-relaxed font-semibold">
+        Silakan screenshot layar HP Anda untuk menyimpan QRIS ini lalu bayar melalui aplikasi e-Wallet favorit Anda.
+      </p>
+
+      <!-- Tombol aksi pembantu simpan QRIS asli -->
+      <a href="https://i.ibb.co.com/m51QTmrh/Whats-App-Image-2026-05-25-at-14-14-42.jpg" target="_blank" class="mt-4 w-full text-center bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold py-2.5 rounded-xl flex items-center justify-center gap-2 transition-all">
+        <i class="fa-solid fa-download"></i> Buka File QRIS Full-HD
+      </a>
+    </div>
+  </div>
+
+  <!-- MODAL: KONFIRMASI HAPUS DOKUMENTASI -->
+  <div id="modal-confirm-delete" class="fixed inset-0 bg-slate-950/80 z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-slate-900 border border-teal-950 p-6 rounded-3xl max-w-sm w-full text-center">
+      <div class="w-12 h-12 bg-rose-500/10 rounded-full flex items-center justify-center text-rose-500 mx-auto mb-3">
+        <i class="fa-solid fa-triangle-exclamation text-xl"></i>
+      </div>
+      <h3 class="text-base font-bold text-white">Hapus Dokumentasi?</h3>
+      <p class="text-xs text-slate-400 mt-2 leading-relaxed">Tindakan ini tidak bisa dibatalkan. Baris dokumentasi terpilih akan dihapus dari Google Sheet.</p>
+      <div class="flex gap-3 mt-5">
+        <button onclick="closeDeleteConfirmation()" class="flex-1 bg-slate-800 hover:bg-slate-700 text-slate-300 font-bold py-2 rounded-xl text-xs transition-all">Batal</button>
+        <button id="btn-execute-delete" class="flex-1 bg-rose-600 hover:bg-rose-500 text-white font-bold py-2 rounded-xl text-xs transition-all">Ya, Hapus</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOTIFIKASI TOAST -->
+  <div id="toast-notif" class="fixed bottom-6 right-6 bg-slate-900 border-2 border-emerald-500 text-slate-100 px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 transform translate-y-24 opacity-0 transition-all duration-300 pointer-events-none">
+    <div id="toast-icon-box" class="w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-400">
+      <i id="toast-icon" class="fa-solid fa-check"></i>
+    </div>
+    <div>
+      <h5 id="toast-title" class="font-bold text-sm">Berhasil!</h5>
+      <p id="toast-desc" class="text-xs text-slate-400">Tindakan Anda telah berhasil diproses.</p>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    // State Penyimpanan Data di Client
+    let state = {
+      ringkasan: {},
+      dokumentasi: [],
+      filterKategori: 'Semua',
+      isAdmin: false,
+      adminPassword: "",
+      targetDeleteRowId: null,
+      
+      // State Baru untuk Slider Sidebar Foto
+      activePhotoList: [],
+      activePhotoIndex: 0
+    };
+
+    // Sensor Sentuh Geser (Swipe Support)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    // Saat DOM Selesai Dimuat, Hubungkan ke Backend GAS
+    window.addEventListener('DOMContentLoaded', () => {
+      fetchDashboardData();
+      setupBackdropClosers();
+      setupTouchAndKeyboardSwipe();
+    });
+
+    /**
+     * Menutup modal otomatis saat area latar belakang gelap disentuh/diklik
+     */
+    function setupBackdropClosers() {
+      document.getElementById('sidebar-backdrop').addEventListener('click', () => {
+        closePhotoSidebar();
+      });
+      document.getElementById('modal-qris').addEventListener('click', () => {
+        closeZoomQR();
+      });
+    }
+
+    /**
+     * Integrasi Keyboard Arrow & Touch Usap untuk Navigasi Slider Sidebar
+     */
+    function setupTouchAndKeyboardSwipe() {
+      // 1. Keyboard Navigasi
+      window.addEventListener('keydown', (e) => {
+        const sidebar = document.getElementById('sidebar-foto');
+        if (!sidebar.classList.contains('translate-x-full')) {
+          if (e.key === 'ArrowRight' || e.key === 'd' || e.key === 'D') {
+            navigatePhoto(1);
+          } else if (e.key === 'ArrowLeft' || e.key === 'a' || e.key === 'A') {
+            navigatePhoto(-1);
+          } else if (e.key === 'Escape') {
+            closePhotoSidebar();
+          }
+        }
+      });
+
+      // 2. Touch Swipe Navigasi pada Area Gambar Utama Sidebar (Passive Event Listeners untuk responsivitas tinggi)
+      const swipeContainer = document.getElementById('sidebar-main-img');
+      swipeContainer.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      swipeContainer.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipeGesture();
+      }, { passive: true });
+    }
+
+    function handleSwipeGesture() {
+      const swipeThreshold = 50; 
+      if (touchEndX < touchStartX - swipeThreshold) {
+        navigatePhoto(1);
+      } else if (touchEndX > touchStartX + swipeThreshold) {
+        navigatePhoto(-1);
+      }
+    }
+
+    /**
+     * Memanggil Fungsi Code.gs menggunakan google.script.run
+     */
+    function fetchDashboardData() {
+      if (typeof google === 'undefined' || !google.script) {
+        console.warn("Berjalan di luar lingkungan Apps Script. Memuat simulator data...");
+        setTimeout(() => {
+          renderDashboard(getFallbackMockData());
+        }, 1000);
+        return;
+      }
+
+      google.script.run
+        .withSuccessHandler((response) => {
+          renderDashboard(response);
+        })
+        .withFailureHandler((error) => {
+          console.error("Gagal menarik data sheet:", error);
+          renderDashboard(getFallbackMockData());
+        })
+        .getDashboardData();
+    }
+
+    /**
+     * Fungsi Render Seluruh Dashboard
+     */
+    function renderDashboard(data) {
+      state.ringkasan = data.ringkasan;
+      state.dokumentasi = data.dokumentasi;
+
+      // 1. Render Teks Info Utama
+      document.getElementById('txt-tanggal-laporan').innerText = state.ringkasan.tanggalLaporan;
+
+      // 2. Render Angka Finansial
+      const target = state.ringkasan.targetDonasi;
+      const terkumpul = state.ringkasan.kasMasjid + state.ringkasan.jariyahWarga; 
+      const sisaDibutuhkan = target - terkumpul;
+      const sisaDana = terkumpul - state.ringkasan.totalPengeluaran;
+
+      document.getElementById('txt-target-donasi').innerText = formatRupiah(target);
+      document.getElementById('txt-donasi-terkumpul').innerText = formatRupiah(terkumpul);
+      document.getElementById('txt-sisa-dibutuhkan').innerText = formatRupiah(sisaDibutuhkan > 0 ? sisaDibutuhkan : 0);
+
+      // 3. Render Detil Sisi Kiri & Sisi Kanan (Meniru Gambar 1)
+      document.getElementById('txt-kas-masjid').innerText = formatRupiah(state.ringkasan.kasMasjid);
+      document.getElementById('txt-jariyah-warga').innerText = formatRupiah(state.ringkasan.jariyahWarga);
+      document.getElementById('txt-total-pengeluaran').innerText = formatRupiah(state.ringkasan.totalPengeluaran);
+      document.getElementById('txt-sisa-dana').innerText = formatRupiah(sisaDana);
+
+      // 4. Update Progress Bar Animasi
+      const persentase = target > 0 ? Math.min(100, Math.round((terkumpul / target) * 100)) : 0;
+      document.getElementById('txt-persentase').innerText = `${persentase}%`;
+      
+      setTimeout(() => {
+        document.getElementById('progress-fill').style.width = `${persentase}%`;
+      }, 300);
+
+      // Pre-fill form admin jika admin sedang login
+      if (state.isAdmin) {
+        document.getElementById('input-tanggal-laporan').value = state.ringkasan.tanggalLaporan;
+        document.getElementById('input-target-donasi').value = state.ringkasan.targetDonasi;
+        document.getElementById('input-kas-masjid').value = state.ringkasan.kasMasjid;
+        document.getElementById('input-jariyah-warga').value = state.ringkasan.jariyahWarga;
+        document.getElementById('input-total-pengeluaran').value = state.ringkasan.totalPengeluaran;
+      }
+
+      // 5. Render Galeri Dokumentasi
+      renderMediaGallery();
+    }
+
+    /**
+     * Fungsi Render Media Galeri
+     */
+    function renderMediaGallery() {
+      const loader = document.getElementById('media-loader');
+      const emptyContainer = document.getElementById('media-empty');
+      const grid = document.getElementById('media-grid');
+
+      loader.classList.add('hidden');
+      grid.innerHTML = '';
+
+      const filteredList = state.dokumentasi.filter(item => {
+        if (state.filterKategori === 'Semua') return true;
+        return item.kategori.toLowerCase() === state.filterKategori.toLowerCase();
+      });
+
+      if (filteredList.length === 0) {
+        emptyContainer.classList.remove('hidden');
+        grid.classList.add('hidden');
+        return;
+      }
+
+      emptyContainer.classList.add('hidden');
+      grid.classList.remove('hidden');
+
+      filteredList.forEach(item => {
+        const isVideo = item.kategori.toLowerCase() === 'video';
+        const card = document.createElement('div');
+        card.className = "bg-[#051e1e]/60 border border-teal-950 rounded-2xl overflow-hidden hover:border-teal-700/50 transition-all duration-300 flex flex-col justify-between group relative";
+
+        let mediaContent = '';
+        if (isVideo) {
+          let ytVideoId = "";
+          if (item.url.includes("embed/")) {
+            ytVideoId = item.url.split("embed/")[1]?.split("?")[0];
+          } else if (item.url.includes("v=")) {
+            ytVideoId = item.url.split("v=")[1]?.split("&")[0];
+          }
+
+          const thumbUrl = ytVideoId 
+            ? `https://img.youtube.com/vi/${ytVideoId}/hqdefault.jpg` 
+            : "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=400&q=80";
+
+          // Format Video diubah ke Portrait 9:16
+          mediaContent = `
+            <div onclick="lazyLoadIframe(this, '${item.url}')" class="aspect-[9/16] w-full bg-slate-950 relative overflow-hidden cursor-pointer group/vid rounded-t-2xl">
+              <img src="${thumbUrl}" alt="${item.judul}" class="w-full h-full object-cover opacity-60 md:group-hover/vid:scale-105 transition-transform duration-500" loading="lazy" decoding="async">
+              <div class="absolute inset-0 flex items-center justify-center">
+                <div class="w-14 h-14 bg-teal-600 rounded-full flex items-center justify-center text-white shadow-lg md:group-hover/vid:bg-teal-500 transition-all duration-300 scale-95 md:group-hover/vid:scale-105 active:scale-90">
+                  <i class="fa-solid fa-play text-xl ml-1"></i>
+                </div>
+              </div>
+              
+              <!-- Penanda putar video -->
+              <div class="absolute bottom-2 right-2 bg-slate-950/80 text-white px-2.5 py-1 rounded-lg text-[9px] flex items-center gap-1">
+                <i class="fa-solid fa-play-circle"></i> Putar Video
+              </div>
+            </div>`;
+        } else {
+          mediaContent = `
+            <div onclick="openPhotoSidebar('${item.rowId}')" class="aspect-video w-full overflow-hidden bg-slate-950 cursor-zoom-in relative active:scale-[0.98] transition-transform">
+              <img src="${item.url}" alt="${item.judul}" class="w-full h-full object-cover md:group-hover:scale-105 transition-transform duration-500" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1590076247564-a29b3add1b0a?auto=format&fit=crop&w=400&q=80'" loading="lazy" decoding="async">
+              <div class="absolute inset-0 bg-slate-950/20 md:group-hover:bg-slate-950/0 transition-colors duration-300"></div>
+              
+              <!-- Penanda zoom visual untuk layar sentuh HP -->
+              <div class="absolute bottom-2 right-2 bg-slate-950/80 text-white px-2.5 py-1 rounded-lg text-[9px] flex items-center gap-1">
+                <i class="fa-solid fa-bars-staggered"></i> Klik Galeri
+              </div>
+            </div>`;
+        }
+
+        // Tombol Hapus khusus Admin
+        let deleteBtnHtml = "";
+        if (state.isAdmin) {
+          deleteBtnHtml = `
+            <button onclick="confirmDeleteDocumentation('${item.rowId}')" class="absolute top-3 right-3 bg-rose-600/90 hover:bg-rose-600 text-white w-8 h-8 rounded-full flex items-center justify-center shadow-lg transition-all z-10 active:scale-95 animate-pulse" title="Hapus Dokumentasi">
+              <i class="fa-solid fa-trash-can text-sm"></i>
+            </button>
+          `;
+        }
+
+        card.innerHTML = `
+          ${deleteBtnHtml}
+          <div>
+            ${mediaContent}
+            <div class="p-4 sm:p-5">
+              <div class="flex items-center gap-2 text-[10px] font-bold uppercase tracking-wider mb-2">
+                <span class="${isVideo ? 'text-amber-400 bg-amber-400/10 border-amber-500/20' : 'text-teal-400 bg-teal-400/10 border-teal-500/20'} px-2 py-0.5 rounded-md border">
+                  ${item.kategori}
+                </span>
+                <span class="text-slate-500 flex items-center gap-1">
+                  <i class="fa-regular fa-clock"></i> ${item.tanggal}
+                </span>
+              </div>
+              <h4 class="text-slate-200 font-bold text-sm leading-snug group-hover:text-white transition-colors">
+                ${item.judul}
+              </h4>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    /**
+     * Memuat iframe video secara dinamis saat disentuh/diklik (Menghemat kuota awal 100%)
+     */
+    function lazyLoadIframe(container, embedUrl) {
+      container.innerHTML = `
+        <iframe src="${embedUrl}?autoplay=1" class="absolute top-0 left-0 w-full h-full border-0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      `;
+      container.removeAttribute('onclick');
+    }
+
+    /**
+     * ================== LOGIC PORTAL CAROUSEL SIDEBAR ==================
+     */
+
+    /**
+     * Membuka Sidebar Foto dan Memuat List Foto Saat Ini
+     */
+    function openPhotoSidebar(rowId) {
+      state.activePhotoList = state.dokumentasi.filter(item => item.kategori.toLowerCase() === 'foto');
+      
+      if (state.activePhotoList.length === 0) return;
+
+      const targetIndex = state.activePhotoList.findIndex(item => item.rowId.toString() === rowId.toString());
+      state.activePhotoIndex = targetIndex !== -1 ? targetIndex : 0;
+
+      renderSidebarActivePhoto();
+      renderSidebarThumbnails();
+
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const sidebar = document.getElementById('sidebar-foto');
+      
+      backdrop.classList.remove('hidden');
+      setTimeout(() => backdrop.classList.add('opacity-100'), 10);
+      
+      sidebar.classList.remove('translate-x-full');
+      document.body.classList.add('overflow-y-hidden'); 
+    }
+
+    /**
+     * Menutup Sidebar Foto
+     */
+    function closePhotoSidebar() {
+      const backdrop = document.getElementById('sidebar-backdrop');
+      const sidebar = document.getElementById('sidebar-foto');
+
+      backdrop.classList.remove('opacity-100');
+      setTimeout(() => backdrop.classList.add('hidden'), 300);
+
+      sidebar.classList.add('translate-x-full');
+      document.body.classList.remove('overflow-y-hidden'); 
+    }
+
+    /**
+     * Memperbarui visual foto aktif di dalam sidebar
+     */
+    function renderSidebarActivePhoto() {
+      const activePhoto = state.activePhotoList[state.activePhotoIndex];
+      if (!activePhoto) return;
+
+      const img = document.getElementById('sidebar-main-img');
+      img.style.opacity = 0.3;
+      
+      setTimeout(() => {
+        img.src = activePhoto.url;
+        img.alt = activePhoto.judul;
+        img.style.opacity = 1;
+      }, 150);
+
+      document.getElementById('sidebar-title').innerText = activePhoto.judul;
+      document.getElementById('sidebar-date').innerHTML = `<i class="fa-regular fa-clock"></i> ${activePhoto.tanggal}`;
+      document.getElementById('sidebar-counter').innerText = `Foto ${state.activePhotoIndex + 1} dari ${state.activePhotoList.length}`;
+      document.getElementById('sidebar-download-btn').href = activePhoto.url;
+
+      updateThumbnailHighlight();
+    }
+
+    /**
+     * Merender Track Thumbnail Mini di Sisi Bawah Sidebar
+     */
+    function renderSidebarThumbnails() {
+      const track = document.getElementById('sidebar-thumb-track');
+      track.innerHTML = '';
+
+      state.activePhotoList.forEach((photo, idx) => {
+        const thumb = document.createElement('div');
+        thumb.id = `sidebar-thumb-${idx}`;
+        thumb.onclick = () => selectPhotoFromThumbnail(idx);
+        thumb.className = `flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border cursor-pointer transition-all duration-300 relative`;
+        
+        thumb.innerHTML = `
+          <img src="${photo.url}" alt="${photo.judul}" class="w-full h-full object-cover" loading="lazy">
+          <div class="absolute inset-0 bg-slate-950/20 hover:bg-transparent transition-colors"></div>
+        `;
+        track.appendChild(thumb);
+      });
+      updateThumbnailHighlight();
+    }
+
+    /**
+     * Update Sorotan Ring Biru pada Thumbnail yang Aktif
+     */
+    function updateThumbnailHighlight() {
+      state.activePhotoList.forEach((_, idx) => {
+        const thumb = document.getElementById(`sidebar-thumb-${idx}`);
+        if (thumb) {
+          if (idx === state.activePhotoIndex) {
+            thumb.className = `flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border cursor-pointer transition-all duration-300 relative border-teal-500 ring-2 ring-teal-500/50 scale-[1.05]`;
+            thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+          } else {
+            thumb.className = `flex-shrink-0 w-20 h-14 rounded-lg overflow-hidden border cursor-pointer transition-all duration-300 relative border-teal-950 hover:border-teal-700`;
+          }
+        }
+      });
+    }
+
+    /**
+     * Memilih foto langsung saat thumbnail diketuk
+     */
+    function selectPhotoFromThumbnail(index) {
+      state.activePhotoIndex = index;
+      renderSidebarActivePhoto();
+    }
+
+    /**
+     * Navigasi Geser (Slide Carousel)
+     */
+    function navigatePhoto(direction) {
+      if (state.activePhotoList.length <= 1) return;
+
+      let newIndex = state.activePhotoIndex + direction;
+      
+      if (newIndex >= state.activePhotoList.length) {
+        newIndex = 0;
+      } else if (newIndex < 0) {
+        newIndex = state.activePhotoList.length - 1;
+      }
+
+      state.activePhotoIndex = newIndex;
+      renderSidebarActivePhoto();
+    }
+
+    /**
+     * Filter Kategori Media Tab
+     */
+    function filterMedia(kategori) {
+      state.filterKategori = kategori;
+      ['Semua', 'Foto', 'Video'].forEach(cat => {
+        const btn = document.getElementById(`btn-tab-${cat}`);
+        if (cat === kategori) {
+          btn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold bg-teal-600 text-white transition-all duration-300";
+        } else {
+          btn.className = "px-4 py-1.5 rounded-lg text-xs font-semibold text-slate-400 hover:text-white transition-all duration-300";
+        }
+      });
+      renderMediaGallery();
+    }
+
+    /**
+     * Helper Formatter Mata Uang Rupiah
+     */
+    function formatRupiah(number) {
+      return new Intl.NumberFormat('id-ID', {
+        style: 'currency',
+        currency: 'IDR',
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      }).format(number);
+    }
+
+    /**
+     * Fungsi Salin Nomor Rekening
+     */
+    function salinNoRek(norek) {
+      const tempInput = document.createElement("input");
+      tempInput.value = norek;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+
+      const icon = document.getElementById('btn-copy-icon');
+      icon.className = "fa-solid fa-check text-emerald-400";
+      showToast("Berhasil Disalin!", "Nomor rekening berhasil disalin ke clipboard Anda.", "emerald");
+      setTimeout(() => {
+        icon.className = "fa-regular fa-copy text-lg text-teal-400";
+      }, 2000);
+    }
+
+    /**
+     * Toast Notifikasi Custom
+     */
+    function showToast(title, desc, type = "emerald") {
+      const toast = document.getElementById('toast-notif');
+      const iconBox = document.getElementById('toast-icon-box');
+      const icon = document.getElementById('toast-icon');
+      
+      document.getElementById('toast-title').innerText = title;
+      document.getElementById('toast-desc').innerText = desc;
+
+      if (type === "emerald") {
+        toast.className = "fixed bottom-6 right-6 bg-[#041a1a] border-2 border-emerald-500 text-slate-100 px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 transform transition-all duration-300 pointer-events-none";
+        iconBox.className = "w-8 h-8 bg-emerald-500/10 rounded-lg flex items-center justify-center text-emerald-400";
+        icon.className = "fa-solid fa-check";
+      } else if (type === "rose") {
+        toast.className = "fixed bottom-6 right-6 bg-[#041a1a] border-2 border-rose-500 text-slate-100 px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 transform transition-all duration-300 pointer-events-none";
+        iconBox.className = "w-8 h-8 bg-rose-500/10 rounded-lg flex items-center justify-center text-rose-400";
+        icon.className = "fa-solid fa-triangle-exclamation";
+      } else {
+        toast.className = "fixed bottom-6 right-6 bg-[#041a1a] border-2 border-teal-500 text-slate-100 px-6 py-4 rounded-2xl shadow-2xl z-50 flex items-center gap-3 transform transition-all duration-300 pointer-events-none";
+        iconBox.className = "w-8 h-8 bg-teal-500/10 rounded-lg flex items-center justify-center text-teal-400";
+        icon.className = "fa-solid fa-info";
+      }
+
+      toast.classList.remove('translate-y-24', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+      setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-24', 'opacity-0');
+      }, 3500);
+    }
+
+    /**
+     * Kontrol Modal & Admin Portal Login
+     */
+    function toggleLoginModal() {
+      const modal = document.getElementById('modal-login');
+      document.getElementById('error-login-msg').classList.add('hidden');
+      document.getElementById('input-password-admin').value = "";
+      modal.classList.toggle('hidden');
+    }
+
+    function handleLoginAdmin(event) {
+      event.preventDefault();
+      const password = document.getElementById('input-password-admin').value;
+
+      if (typeof google === 'undefined' || !google.script) {
+        if (password === "admin123") {
+          loginSuccess(password);
+        } else {
+          loginFail();
+        }
+        return;
+      }
+
+      google.script.run
+        .withSuccessHandler((isValid) => {
+          if (isValid) {
+            loginSuccess(password);
+          } else {
+            loginFail();
+          }
+        })
+        .withFailureHandler((err) => {
+          console.error(err);
+          loginFail();
+        })
+        .verifyAdmin(password);
+    }
+
+    function loginSuccess(password) {
+      state.isAdmin = true;
+      state.adminPassword = password;
+      toggleLoginModal();
+      
+      const adminPanel = document.getElementById('admin-panel');
+      adminPanel.classList.remove('hidden');
+      
+      document.getElementById('portal-text').innerText = "Admin Aktif";
+      document.getElementById('btn-portal-admin').className = "flex items-center gap-2 bg-teal-600 border border-teal-500 text-white px-4 py-2.5 rounded-full shadow-2xl transition-all duration-300";
+      document.getElementById('portal-icon').className = "fa-solid fa-user-check text-white";
+
+      document.getElementById('input-tanggal-laporan').value = state.ringkasan.tanggalLaporan;
+      document.getElementById('input-target-donasi').value = state.ringkasan.targetDonasi;
+      document.getElementById('input-kas-masjid').value = state.ringkasan.kasMasjid;
+      document.getElementById('input-jariyah-warga').value = state.ringkasan.jariyahWarga;
+      document.getElementById('input-total-pengeluaran').value = state.ringkasan.totalPengeluaran;
+
+      renderMediaGallery();
+      showToast("Masuk Berhasil", "Selamat datang kembali admin Masjid Darrusalam.", "emerald");
+    }
+
+    function loginFail() {
+      document.getElementById('error-login-msg').classList.remove('hidden');
+      showToast("Akses Ditolak", "Sandi yang dimasukkan salah.", "rose");
+    }
+
+    /**
+     * Keluar dari Dashboard Admin
+     */
+    function logoutAdmin() {
+      state.isAdmin = false;
+      state.adminPassword = "";
+      
+      document.getElementById('admin-panel').classList.add('hidden');
+      
+      document.getElementById('portal-text').innerText = "Portal Admin";
+      document.getElementById('btn-portal-admin').className = "flex items-center gap-2 bg-[#093a3a]/90 border border-[#1d5c5c] hover:border-teal-400/80 hover:bg-[#0d4d4d] text-slate-300 hover:text-white px-4 py-2.5 rounded-full shadow-2xl transition-all duration-300";
+      document.getElementById('portal-icon').className = "fa-solid fa-lock text-teal-400";
+
+      renderMediaGallery();
+      showToast("Berhasil Keluar", "Sesi pengelolaan admin ditutup.", "blue");
+    }
+
+    /**
+     * Submit Handler: Update Keuangan
+     */
+    function handleUpdateKeuangan(event) {
+      event.preventDefault();
+      
+      const updatedData = {
+        tanggalLaporan: document.getElementById('input-tanggal-laporan').value,
+        targetDonasi: Number(document.getElementById('input-target-donasi').value),
+        kasMasjid: Number(document.getElementById('input-kas-masjid').value),
+        jariyahWarga: Number(document.getElementById('input-jariyah-warga').value),
+        totalPengeluaran: Number(document.getElementById('input-total-pengeluaran').value)
+      };
+
+      showToast("Memproses...", "Menyimpan perubahan ke Google Sheets", "blue");
+
+      if (typeof google === 'undefined' || !google.script) {
+        setTimeout(() => {
+          state.ringkasan = updatedData;
+          renderDashboard({ ringkasan: state.ringkasan, dokumentasi: state.dokumentasi });
+          showToast("Berhasil Disimpan!", "Data keuangan berhasil diperbarui.", "emerald");
+        }, 1000);
+        return;
+      }
+
+      google.script.run
+        .withSuccessHandler((response) => {
+          renderDashboard(response);
+          showToast("Berhasil Disimpan!", "Data keuangan berhasil diperbarui.", "emerald");
+        })
+        .withFailureHandler((err) => {
+          showToast("Proses Gagal", err.toString(), "rose");
+        })
+        .updateFinancialData(state.adminPassword, updatedData);
+    }
+
+    /**
+     * Helper untuk Form Dynamic: Tambah Baris
+     */
+    function addDocRow() {
+      const container = document.getElementById('bulk-doc-container');
+      const items = container.querySelectorAll('.doc-item');
+      const lastItem = items[items.length - 1];
+      
+      // Duplikasi elemen baris terakhir
+      const newItem = lastItem.cloneNode(true);
+      
+      // Salin tanggal dan kategori dari item sebelumnya agar tidak perlu ketik ulang,
+      // tetapi kosongkan judul dan URL
+      const prevDate = lastItem.querySelector('.doc-tanggal').value;
+      const prevKat = lastItem.querySelector('.doc-kategori').value;
+      
+      newItem.querySelector('.doc-tanggal').value = prevDate;
+      newItem.querySelector('.doc-kategori').value = prevKat;
+      newItem.querySelector('.doc-judul').value = '';
+      newItem.querySelector('.doc-url').value = '';
+      
+      // Munculkan tombol silang merah muda
+      newItem.querySelector('.btn-remove-doc').classList.remove('hidden');
+      
+      container.appendChild(newItem);
+      
+      // Auto-scroll panel ke bawah
+      container.scrollTop = container.scrollHeight;
+    }
+
+    /**
+     * Helper untuk Form Dynamic: Hapus Baris
+     */
+    function removeDocRow(btn) {
+      const container = document.getElementById('bulk-doc-container');
+      // Pastikan form minimal menyisakan 1 baris
+      if (container.querySelectorAll('.doc-item').length > 1) {
+        btn.closest('.doc-item').remove();
+      }
+    }
+
+    /**
+     * Submit Handler: Tambah BANYAK Dokumentasi (Bulk Upload)
+     */
+    function handleAddDokumentasiBulk(event) {
+      event.preventDefault();
+
+      const items = document.querySelectorAll('.doc-item');
+      const docsArray = [];
+      
+      // Kumpulkan semua data dari setiap baris
+      items.forEach(item => {
+        docsArray.push({
+          tanggal: item.querySelector('.doc-tanggal').value,
+          kategori: item.querySelector('.doc-kategori').value,
+          judul: item.querySelector('.doc-judul').value,
+          url: item.querySelector('.doc-url').value
+        });
+      });
+
+      showToast("Memproses...", `Menyimpan ${docsArray.length} dokumentasi ke Google Sheets`, "blue");
+
+      if (typeof google === 'undefined' || !google.script) {
+        // Mode Simulator
+        setTimeout(() => {
+          docsArray.reverse().forEach(newDoc => {
+            const simulatedDate = new Date(newDoc.tanggal);
+            const formattedDate = simulatedDate.toLocaleDateString('id-ID', { day: '2-digit', month: 'short', year: 'numeric' });
+            
+            let cleanUrl = newDoc.url;
+            if (cleanUrl.includes("youtube.com") || cleanUrl.includes("youtu.be")) {
+              cleanUrl = "https://www.youtube.com/embed/dQw4w9WgXcQ"; 
+            } else if (cleanUrl.includes("drive.google.com")) {
+              cleanUrl = "https://images.unsplash.com/photo-1590076247564-a29b3add1b0a?auto=format&fit=crop&w=800&q=80"; 
+            }
+
+            const addedDoc = {
+              rowId: Date.now() + Math.random(), 
+              tanggal: formattedDate,
+              kategori: newDoc.kategori,
+              judul: newDoc.judul,
+              url: cleanUrl
+            };
+            state.dokumentasi.unshift(addedDoc); 
+          });
+
+          renderDashboard({ ringkasan: state.ringkasan, dokumentasi: state.dokumentasi });
+          
+          // Bersihkan Form dan sisakan 1 baris
+          resetBulkForm();
+          showToast("Berhasil Disimpan!", `${docsArray.length} dokumentasi berhasil ditambahkan.`, "emerald");
+        }, 1000);
+        return;
+      }
+
+      // Mode Live Google Apps Script
+      google.script.run
+        .withSuccessHandler((response) => {
+          renderDashboard(response);
+          resetBulkForm();
+          showToast("Berhasil Disimpan!", `${docsArray.length} dokumentasi berhasil ditambahkan.`, "emerald");
+        })
+        .withFailureHandler((err) => {
+          showToast("Proses Gagal", err.toString(), "rose");
+        })
+        .addMultipleDocumentation(state.adminPassword, docsArray); // Panggil fungsi bulk baru
+    }
+
+    /**
+     * Mengosongkan form bulk dan menyisakan satu baris
+     */
+    function resetBulkForm() {
+      const container = document.getElementById('bulk-doc-container');
+      const firstItem = container.querySelector('.doc-item').cloneNode(true);
+      firstItem.querySelector('.doc-judul').value = '';
+      firstItem.querySelector('.doc-url').value = '';
+      firstItem.querySelector('.btn-remove-doc').classList.add('hidden');
+      container.innerHTML = '';
+      container.appendChild(firstItem);
+    }
+
+    /**
+     * Handler: Hapus Dokumentasi
+     */
+    function confirmDeleteDocumentation(rowId) {
+      state.targetDeleteRowId = rowId;
+      document.getElementById('modal-confirm-delete').classList.remove('hidden');
+      
+      document.getElementById('btn-execute-delete').onclick = function() {
+        executeDeleteDocumentation();
+      };
+    }
+
+    function closeDeleteConfirmation() {
+      document.getElementById('modal-confirm-delete').classList.add('hidden');
+      state.targetDeleteRowId = null;
+    }
+
+    function executeDeleteDocumentation() {
+      const rowId = state.targetDeleteRowId;
+      closeDeleteConfirmation();
+
+      showToast("Menghapus...", "Sedang menghapus baris di Google Sheets", "blue");
+
+      if (typeof google === 'undefined' || !google.script) {
+        setTimeout(() => {
+          state.dokumentasi = state.dokumentasi.filter(item => item.rowId.toString() !== rowId.toString());
+          renderDashboard({ ringkasan: state.ringkasan, dokumentasi: state.dokumentasi });
+          showToast("Terhapus!", "Dokumentasi berhasil dihapus.", "emerald");
+        }, 1000);
+        return;
+      }
+
+      google.script.run
+        .withSuccessHandler((response) => {
+          renderDashboard(response);
+          showToast("Terhapus!", "Dokumentasi berhasil dihapus.", "emerald");
+        })
+        .withFailureHandler((err) => {
+          showToast("Gagal Menghapus", err.toString(), "rose");
+        })
+        .deleteDocumentation(state.adminPassword, rowId);
+    }
+
+    /**
+     * Modal QRIS Control
+     */
+    function zoomQR() {
+      document.getElementById('modal-qris').classList.remove('hidden');
+    }
+
+    function closeZoomQR() {
+      document.getElementById('modal-qris').classList.add('hidden');
+    }
+
+    /**
+     * Fallback Data Simulator
+     */
+    function getFallbackMockData() {
+      return {
+        ringkasan: {
+          tanggalLaporan: "2 Januari 2026",
+          targetDonasi: 730204000,
+          kasMasjid: 150000000,
+          jariyahWarga: 260755000,
+          totalPengeluaran: 326268500
+        },
+        dokumentasi: [
+          {
+            rowId: 2,
+            tanggal: "02 Jan 2026",
+            kategori: "Foto",
+            judul: "Pemasangan Bata Merah Sisi Timur Masjid",
+            url: "https://images.unsplash.com/photo-1590076247564-a29b3add1b0a?auto=format&fit=crop&w=800&q=80"
+          },
+          {
+            rowId: 3,
+            tanggal: "30 Des 2025",
+            kategori: "Foto",
+            judul: "Pengecoran Tiang Pondasi Utama",
+            url: "https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=800&q=80"
+          },
+          {
+            rowId: 4,
+            tanggal: "28 Des 2025",
+            kategori: "Video",
+            judul: "Dokumentasi Udara (Drone) Progres Akhir Tahun",
+            url: "https://www.youtube.com/embed/dQw4w9WgXcQ"
+          },
+          {
+            rowId: 5,
+            tanggal: "25 Des 2025",
+            kategori: "Foto",
+            judul: "Kedatangan Material Semen dan Besi Baja",
+            url: "https://images.unsplash.com/photo-1581094288338-2314dddb7eed?auto=format&fit=crop&w=800&q=80"
+          }
+        ]
+      };
+    }
+  </script>
+</body>
+</html>
